@@ -1,6 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Model
 {
+    [Table("tb_fornecedor")]
     internal class Fornecedor
     {
         [Key]
