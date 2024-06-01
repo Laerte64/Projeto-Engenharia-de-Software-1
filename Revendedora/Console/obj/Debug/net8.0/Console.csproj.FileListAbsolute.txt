@@ -1,0 +1,14 @@
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/bin/Debug/net8.0/Console
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/bin/Debug/net8.0/Console.deps.json
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/bin/Debug/net8.0/Console.runtimeconfig.json
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/bin/Debug/net8.0/Console.dll
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/bin/Debug/net8.0/Console.pdb
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/Console.GeneratedMSBuildEditorConfig.editorconfig
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/Console.AssemblyInfoInputs.cache
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/Console.AssemblyInfo.cs
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/Console.csproj.CoreCompileInputs.cache
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/Console.dll
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/refint/Console.dll
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/Console.pdb
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/Console.genruntimeconfig.cache
+/home/ledur/projects/Projeto-Engenharia-de-Software-1/Revendedora/Console/obj/Debug/net8.0/ref/Console.dll
