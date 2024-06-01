@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
-    internal class Estabelicimento
+    internal class Estabelecimento
     {
         [Key]
         public int ID {get; set;}

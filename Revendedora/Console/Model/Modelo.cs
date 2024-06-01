@@ -2,7 +2,6 @@
 
 namespace Model
 {
-    [Table("tb_modelo")]
     internal class Modelo
     {
         [Required]

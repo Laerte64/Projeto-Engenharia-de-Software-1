@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
-    abstract class Pessoa
+    internal abstract class Pessoa
     {
         [Key]
         public int ID { get; private set; }
