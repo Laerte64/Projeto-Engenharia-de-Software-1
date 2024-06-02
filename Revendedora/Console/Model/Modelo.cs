@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
     [Table("tb_modelo")]
     internal class Modelo
     {
+        [Key]
+        public readonly int ID;
         [Required]
         [MaxLength(100)]
         public readonly string Nome;
@@ -15,26 +18,22 @@ namespace Model
         public readonly int Ano;
         [Required]
         [MaxLength(100)]
-        public readonly string Motor;
+        public string Motor;
         [Required]
-        public readonly int NumeroPortas;
-        [Required]
-        [MaxLength(100)]
-        public readonly string Transmissao;
+        public int NumeroPortas;
         [Required]
         [MaxLength(100)]
-        public readonly string Combustivel;
+        public string Transmissao;
+        [Required]
+        [MaxLength(100)]
+        public string Combustivel;
 
-        public Modelo(string nome, string marca, int ano, string motor, int numeroPortas, string transmissao, string combustivel)
+        public Modelo(string nome, string marca, int ano)
         {
             this.ID = 0;
             this.Nome = nome;
             this.Marca = marca;
             this.Ano = ano;
-            this.Motor = motor;
-            this.NumeroPortas = numeroPortas;
-            this.Transmissao = transmissao;
-            this.Combustivel = combustivel;
         }
     }
 }

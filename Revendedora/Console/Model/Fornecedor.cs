@@ -7,15 +7,15 @@ namespace Model
     internal class Fornecedor
     {
         [Key]
-        public readonly int ID
+        public readonly int ID;
 
         [Required]
         [MaxLength(100)]
-        public readonly string Nome
+        public readonly string Nome;
 
         [Required]
         [MaxLength(20)]
-        public readonly string CNPJ
+        public readonly string CNPJ;
 
         public Fornecedor(string nome, string cnpj)
         {

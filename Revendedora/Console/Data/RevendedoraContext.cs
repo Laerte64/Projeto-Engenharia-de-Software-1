@@ -6,8 +6,23 @@ namespace AutoCenter.Data
 {
     class AutoCenterContext : DbContext
     {
-        //empresa
+ 
+        //pessoas 
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
+
+        //compras e vendas
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
+
+        //estabelimento e fornecador
+        public DbSet<Estabelecimento> Estabelecimentos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
+        
+        //veiculo modelo
+        public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Modelo> Modelos { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -5,27 +5,9 @@ namespace Model
     {
         private Modelo _modelo;
 
-        public ModeloBuilder()
+        public ModeloBuilder(string nome, string marca, int ano)
         {
-            _modelo = new Modelo();
-        }
-
-        public ModeloBuilder AdicionarNome(string nome)
-        {
-            _modelo.Nome = nome;
-            return this;
-        }
-
-        public ModeloBuilder AdicionarMarca(string marca)
-        {
-            _modelo.Marca = marca;
-            return this;
-        }
-
-        public ModeloBuilder AdicionarAno(int ano)
-        {
-            _modelo.Ano = ano;
-            return this;
+            _modelo = new Modelo(nome, marca, ano);
         }
 
         public ModeloBuilder AdicionarMotor(string motor)
