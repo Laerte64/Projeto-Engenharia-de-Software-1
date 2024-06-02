@@ -2,32 +2,39 @@
 
 namespace Model
 {
+    [Table("tb_modelo")]
     internal class Modelo
     {
         [Required]
         [MaxLength(100)]
-        public string Nome { get; set; }
-
+        public readonly string Nome;
         [Required]
         [MaxLength(100)]
-        public string Marca { get; set; }
-
+        public readonly string Marca;
         [Required]
-        public int Ano { get; set; }
-
+        public readonly int Ano;
         [Required]
         [MaxLength(100)]
-        public string Motor { get; set; }
-
+        public readonly string Motor;
         [Required]
-        public int NumeroPortas { get; set; }
-
+        public readonly int NumeroPortas;
         [Required]
         [MaxLength(100)]
-        public string Transmissao { get; set; }
-
+        public readonly string Transmissao;
         [Required]
         [MaxLength(100)]
-        public string Combustivel { get; set; }
+        public readonly string Combustivel;
+
+        public Modelo(string nome, string marca, int ano, string motor, int numeroPortas, string transmissao, string combustivel)
+        {
+            this.ID = 0;
+            this.Nome = nome;
+            this.Marca = marca;
+            this.Ano = ano;
+            this.Motor = motor;
+            this.NumeroPortas = numeroPortas;
+            this.Transmissao = transmissao;
+            this.Combustivel = combustivel;
+        }
     }
 }

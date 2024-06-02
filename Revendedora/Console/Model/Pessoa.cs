@@ -2,15 +2,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
+    [Table("tb_pessoa")]
     internal abstract class Pessoa
     {
         [Key]
-        public int ID { get; private set; }
+        public readonly int ID;
         [Required]
         [MaxLength(100)]
-        public string Nome { get; private set; }
+        public readonly string Nome;
         [Required]
         [MaxLength(11)]
-        public string CPF { get; private set; }
+        public readonly string CPF;
+
+        public Pessoa(string nome, string cpf)
+        {
+            ID = 0;
+            Nome = nome;
+            CPF = cpf;
+        }
     }
 }

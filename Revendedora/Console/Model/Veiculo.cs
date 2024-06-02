@@ -3,44 +3,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
+    [Table("tb_veiculo")]
     internal class Veiculo
     {
         [Key]
-        public int ID { get; private set; }
-
+        public readonly int ID;
         [Required]
-        public int ModeloID { get; private set; }
-        [ForeignKey("ModeloID")]
-        public Modelo Modelo { get; private set; }
-
+        public readonly Modelo Modelo;
         [Required]
-        public Condicao _Condicao { get; private set; }
-
+        public readonly Condicao _Condicao;
         [Required]
-        public int CompraID { get; private set; }
-        [ForeignKey("CompraID")]
-        public Compra Compra { get; private set; }
-
-        public int? VendaID { get; private set; }
-        [ForeignKey("VendaID")]
-        public Venda? Venda { get; private set; }
-
+        public readonly Compra Compra;
+        public readonly Venda? Venda;
         [Required]
-        public int EstabelecimentoID { get; private set; }
-        [ForeignKey("EstabelecimentoID")]
-        public Estabelecimento Estabelecimento { get; private set; }
+        public readonly Estabelecimento Estabelecimento;
 
-        public Veiculo(int id, int modeloID, Modelo modelo, Condicao condicao, int compraID, Compra compra, int? vendaID, Venda? venda, int estabelecimentoID, Estabelecimento estabelecimento)
+        public Veiculo(Modelo modelo, Condicao condicao, Compra compra, Estabelecimento estabelecimento)
         {
-            ID = id;
-            ModeloID = modeloID;
+            ID = 0;
             Modelo = modelo;
             _Condicao = condicao;
-            CompraID = compraID;
             Compra = compra;
-            VendaID = vendaID;
-            Venda = venda;
-            EstabelecimentoID = estabelecimentoID;
+            Venda = null;
             Estabelecimento = estabelecimento;
         }
 

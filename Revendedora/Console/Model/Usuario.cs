@@ -2,18 +2,28 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
-    internal class Usuario : Pessoa
+    [Table("tb_usuario")]
+    internal class Usuario
     {
         [Key]
-        public int ID { get; private set; }
+        public readonly int ID;
         [Required]
         [MaxLength(50)]
-        public string Login { get; private set; }
+        public readonly string Login;
         [Required]
         [MaxLength(100)]
         private string _senha;
+        [Required]
+        private readonly Funcionario _funcionario;
 
-        public bool VerificarSenha(string senha)
+        public Usuario(string login, string senha)
+        {
+            ID = 0;
+            Login = login;
+            _senha = senha;
+        }
+
+        private bool VerificarSenha(string senha)
         {
             return _senha.Equals(senha);
         }
@@ -24,6 +34,13 @@ namespace Model
                 return false;
             _senha = nova;
             return true;
+        }
+
+        public Funcionario? AcessarSistema(string senha)
+        {
+            if (!VerificarSenha(senha))
+                return null;
+            return _funcionario;
         }
     }
 }
