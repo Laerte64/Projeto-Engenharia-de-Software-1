@@ -2,10 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Model;
 
-namespace AutoCenter.Data
+namespace Data
 {
-    class AutoCenterContext : DbContext
+    class RevendedoraContext : DbContext
     {
+        // Singleton
+        private RevendedoraContext instance = new RevendedoraContext();
+        private RevendedoraContext() {}
+        public RevendedoraContext AdquirirContexto() => instance;
+
+
         //pessoas 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
