@@ -11,30 +11,30 @@ namespace Repository
 {
     internal class EstabelecimentoRepository : IRepository<Estabelecimento>
     {
-        public void Add(Estabelecimento estabelecimento)
+        public void Add(Estabelecimento e)
         {
             using (var _context = new RevendedoraContext())
             {
-                _context.Estabelecimentos.Add(estabelecimento);
+                _context.Estabelecimentos.Add(e);
                 _context.SaveChanges();
             }
         }
 
-        public void Remove(Estabelecimento estabelecimento)
+        public void Remove(Estabelecimento e)
         {
             using (var _context = new RevendedoraContext())
             {
-                _context.Estabelecimentos.Remove(estabelecimento);
+                _context.Estabelecimentos.Remove(e);
                 _context.SaveChanges();
             }
 
         }
 
-        public void Update(Estabelecimento estabelecimento)
+        public void Update(Estabelecimento e)
         {
             using (var _context = new RevendedoraContext())
             {
-                _context.Estabelecimentos.Update(estabelecimento);
+                _context.Estabelecimentos.Update(e);
                 _context.SaveChanges();
             }
         }
@@ -44,7 +44,6 @@ namespace Repository
             using (var _context = new RevendedoraContext())
             {
                return  _context.Estabelecimentos.ToList();
-                _context.SaveChanges();
             }
         }
 
@@ -52,7 +51,14 @@ namespace Repository
         {
             using (var _context = new RevendedoraContext())
             {
-                return _context.Estabelecimentos.Find(id);
+                var estabelecimento = _context.Estabelecimentos.Find(id);
+
+                if (estabelecimento == null)
+                {
+                    throw new ArgumentException("ID não encontrado");
+                }
+
+                return estabelecimento;
             }
         }
     }
