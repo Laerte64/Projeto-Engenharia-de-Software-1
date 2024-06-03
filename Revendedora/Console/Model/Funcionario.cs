@@ -6,11 +6,17 @@ namespace Model
     [Table("tb_funcionario")]
     internal class Funcionario : Pessoa
     {
-        private Usuario? _usuario;
-        private readonly List<Venda> _vendas;
+        public Usuario? _usuario;
+        public List<Venda> _vendas;
         public IReadOnlyList<Venda> Vendas => _vendas.AsReadOnly();
-        private readonly List<Compra> _compras;
-        public IReadOnlyList<Compra> Compra => _compras.AsReadOnly();
+        public List<Compra> _compras;
+        public IReadOnlyList<Compra> Compras => _compras.AsReadOnly();
+
+
+        // Construtor parametrizado para uso prático
+        public Funcionario() : base()
+        {
+        }
 
         public Funcionario(string nome, string cpf, Usuario? usuario) : base(nome, cpf)
         {

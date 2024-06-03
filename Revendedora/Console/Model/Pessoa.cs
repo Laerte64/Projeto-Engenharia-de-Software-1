@@ -7,13 +7,16 @@ namespace Model
     internal abstract class Pessoa
     {
         [Key]
-        public readonly int ID;
+        public int ID { get; set; }
+
         [Required]
         [MaxLength(100)]
-        public readonly string Nome;
+        public string Nome { get; set; }
         [Required]
         [MaxLength(11)]
-        public readonly string CPF;
+        public string CPF { get; set; }
+
+        public Pessoa() { }
 
         public Pessoa(string nome, string cpf)
         {

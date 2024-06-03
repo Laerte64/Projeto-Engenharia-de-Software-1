@@ -7,18 +7,23 @@ namespace Model
     internal class Compra
     {
         [Key]
-        public readonly int ID;
+        public int ID { get; set; }
         [Required]
-        public readonly Veiculo Veiculo;
+        public Veiculo Veiculo { get; set; }
         [Required]
-        public readonly Fornecedor Fornecedor;
+        public Fornecedor Fornecedor { get; set; }
         [Required]
-        public readonly Funcionario Funcionario;
+        public Funcionario Funcionario { get; set; }
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
-        public readonly Decimal Valor;
+        public Decimal Valor { get; set; }
         [Required]
-        public readonly DateTime Horario;
+        public DateTime Horario { get; set; }
+
+        public Compra()
+        {
+
+        }
 
         public Compra(Veiculo veiculo, Fornecedor fornecedor, Funcionario funcionario, Decimal valor, DateTime horario)
         {

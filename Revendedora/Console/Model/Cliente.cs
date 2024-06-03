@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,17 +8,18 @@ namespace Model
     [Table("tb_cliente")]
     internal class Cliente : Pessoa
     {
-        private readonly List<Venda> _vendas;
+        private List<Venda> _vendas = new List<Venda>();
         public IReadOnlyList<Venda> Vendas => _vendas.AsReadOnly();
 
-        public Cliente(string nome, string cpf) : base(nome, cpf)
+  
+        // Construtor parametrizado para uso prático
+        public Cliente() : base()
         {
-            _vendas = new List<Venda>();
         }
 
         public bool AdicionarVenda(Venda venda)
         {
-            if (venda.Cliente.ID != ID)
+            if (venda.ID != ID)  // Ajuste necessário: Utilize ClienteID assumindo que Venda possui essa propriedade de chave estrangeira.
                 return false;
             _vendas.Add(venda);
             return true;

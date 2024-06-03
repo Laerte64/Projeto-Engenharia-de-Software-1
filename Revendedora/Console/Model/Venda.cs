@@ -8,18 +8,23 @@ namespace Model
     internal class Venda
     {
         [Key]
-        public readonly int ID;
+        public int ID { get; set; }
         [Required]
-        public readonly Veiculo Veiculo;
+        public Veiculo Veiculo { get; set; }
         [Required]
-        public readonly Cliente Cliente;
+        public Cliente Cliente { get; set; }
         [Required]
-        public readonly Funcionario Funcionario;
+        public Funcionario Funcionario { get; set; }
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
-        public readonly Decimal Valor;
+        public Decimal Valor { get; set; }
         [Required]
-        public readonly DateTime Horario;
+        public DateTime Horario { get; set; }
+
+        public Venda()
+        {
+
+        }
 
         public Venda(Veiculo veiculo, Cliente cliente, Funcionario funcionario, Decimal valor, DateTime horario)
         {

@@ -7,41 +7,21 @@ namespace Model
     internal class Usuario
     {
         [Key]
-        public readonly int ID;
+        public int ID { get; set; }
+
         [Required]
         [MaxLength(50)]
-        public readonly string Login;
+        public string Login { get; set; }
+
         [Required]
         [MaxLength(100)]
-        private string _senha;
-        [Required]
-        private readonly Funcionario _funcionario;
+        public string Senha { get; set; }
+        public Funcionario Funcionario { get; set; }
 
-        public Usuario(string login, string senha)
+        public Usuario()
         {
-            ID = 0;
-            Login = login;
-            _senha = senha;
+
         }
 
-        private bool VerificarSenha(string senha)
-        {
-            return _senha.Equals(senha);
-        }
-
-        public bool AlterarSenha(string antiga, string nova)
-        {
-            if (!VerificarSenha(antiga))
-                return false;
-            _senha = nova;
-            return true;
-        }
-
-        public Funcionario? AcessarSistema(string senha)
-        {
-            if (!VerificarSenha(senha))
-                return null;
-            return _funcionario;
-        }
     }
 }

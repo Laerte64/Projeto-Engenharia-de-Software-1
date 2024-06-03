@@ -7,20 +7,27 @@ namespace Model
     internal class Estabelecimento
     {
         [Key]
-        public readonly int ID;
-        [Required]
-        [MaxLength(100)]
-        public readonly string Estado;
-        [Required]
-        [MaxLength(100)]
-        public readonly string Cidade;
-        [Required]
-        [MaxLength(100)]
-        public readonly string Endereco;
+        public int ID { get; set; } // Auto-implementado para compatibilidade com EF Core
 
+        [Required] // Assegura que o campo não seja nulo no banco de dados
+        [MaxLength(100)] // Define o tamanho máximo do campo no banco
+        public string Estado { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Cidade { get; set; }
+
+        [Required]
+        [MaxLength(200)]
+        public string Endereco { get; set; }
+
+        // Construtor sem parâmetros é importante para EF Core
+        public Estabelecimento() {
+        }
+
+        // Construtor com parâmetros para uso prático
         public Estabelecimento(string estado, string cidade, string endereco)
         {
-            ID = 0;
             Estado = estado;
             Cidade = cidade;
             Endereco = endereco;
