@@ -8,20 +8,22 @@ namespace Model
     [Table("tb_cliente")]
     internal class Cliente : Pessoa
     {
-        private List<Venda> _vendas = new List<Venda>();
-        public IReadOnlyList<Venda> Vendas => _vendas.AsReadOnly();
+        private List<Venda> Vendas = new List<Venda>();
+        public Cliente() { }
 
-  
-        // Construtor parametrizado para uso prático
-        public Cliente() : base()
+        public Cliente(string nome, string cpf)
         {
+            ID = 0;
+            Nome = nome;
+            CPF = cpf;
+            Vendas = new List<Venda>();
         }
 
         public bool AdicionarVenda(Venda venda)
         {
-            if (venda.ID != ID)  // Ajuste necessário: Utilize ClienteID assumindo que Venda possui essa propriedade de chave estrangeira.
+            if (venda.ID != ID)
                 return false;
-            _vendas.Add(venda);
+            Vendas.Add(venda);
             return true;
         }
     }

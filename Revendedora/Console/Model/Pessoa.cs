@@ -7,14 +7,14 @@ namespace Model
     internal abstract class Pessoa
     {
         [Key]
-        public int ID { get; set; }
+        public int ID;
 
         [Required]
         [MaxLength(100)]
-        public string Nome { get; set; }
+        public string Nome;
         [Required]
         [MaxLength(11)]
-        public string CPF { get; set; }
+        public string CPF;
 
         public Pessoa() { }
 

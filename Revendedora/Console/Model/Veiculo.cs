@@ -7,32 +7,33 @@ namespace Model
     internal class Veiculo
     {
         [Key]
-        public int ID { get; set; }
+        public int ID;
 
         [Required]
-        public Modelo Modelo { get; set; }
+        public Modelo Modelo;
 
         [Required]
-        public Condicao Condicao_ { get; set; }
+        public Condicao _Condicao;
 
         [Required]
-        public Compra Compra { get; set; }
+        public Compra Compra;
 
-        public Venda? Venda { get; set; }
+        public Venda? Venda;
 
         [Required]
-        public Estabelecimento Estabelecimento { get; set; } 
+        [Column(TypeName = "decimal(18, 2)")]
+        public Decimal Valor;
 
-        public Veiculo()
-        {
+        [Required]
+        public Estabelecimento Estabelecimento;
 
-        }
+        public Veiculo() { }
 
         public Veiculo(Modelo modelo, Condicao condicao, Compra compra, Estabelecimento estabelecimento)
         {
             ID = 0;
             Modelo = modelo;
-            Condicao_ = condicao;
+            _Condicao = condicao;
             Compra = compra;
             Venda = null;
             Estabelecimento = estabelecimento;

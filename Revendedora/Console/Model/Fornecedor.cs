@@ -7,21 +7,18 @@ namespace Model
     internal class Fornecedor
     {
         [Key]
-        public int ID { get; set; }
+        public int ID;
 
         [Required]
         [MaxLength(100)]
-        public string Nome { get; set; }
+        public string Nome;
 
         [Required]
         [MaxLength(20)]
-        public string CNPJ { get; set; }
+        public string CNPJ;
 
 
-        public Fornecedor()
-        {
-
-        }
+        public Fornecedor() { }
 
         public Fornecedor(string nome, string cnpj)
         {

@@ -7,21 +7,24 @@ namespace Model
     internal class Usuario
     {
         [Key]
-        public int ID { get; set; }
+        public int ID;
 
         [Required]
         [MaxLength(50)]
-        public string Login { get; set; }
+        public string Login;
 
         [Required]
         [MaxLength(100)]
-        public string Senha { get; set; }
-        public Funcionario Funcionario { get; set; }
+        public string Senha;
+        public Funcionario Funcionario;
 
-        public Usuario()
+        public Usuario() {}
+
+        public Usuario(string login, string senha)
         {
-
+            ID = 0;
+            Login = login;
+            Senha = senha;
         }
-
     }
 }

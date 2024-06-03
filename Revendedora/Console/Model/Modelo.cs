@@ -7,38 +7,35 @@ namespace Model
     internal class Modelo
     {
         [Key]
-        public int ID { get; set; }
+        public int ID;
 
         [Required]
         [MaxLength(100)]
-        public string Nome { get; set; }
+        public string Nome;
 
         [Required]
         [MaxLength(100)]
-        public string Marca { get; set; }
+        public string Marca;
 
         [Required]
         public int Ano;
 
         [Required]
         [MaxLength(100)]
-        public string Motor { get; set; }
+        public string Motor;
 
         [Required]
-        public int NumeroPortas { get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        public string Transmissao { get; set; }
+        public int NumeroPortas;
 
         [Required]
         [MaxLength(100)]
-        public string Combustivel { get; set; }
+        public string Transmissao;
 
-        public Modelo()
-        {
+        [Required]
+        [MaxLength(100)]
+        public string Combustivel;
 
-        }
+        public Modelo() { }
 
         public Modelo(string nome, string marca, int ano)
         {
