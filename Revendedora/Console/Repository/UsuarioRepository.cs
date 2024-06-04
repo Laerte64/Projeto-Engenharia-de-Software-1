@@ -13,7 +13,7 @@ namespace Repository
     {
         public void Add(Usuario e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Usuarios.Add(e);
                 _context.SaveChanges();
@@ -22,7 +22,7 @@ namespace Repository
 
         public void Remove(Usuario e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Usuarios.Remove(e);
                 _context.SaveChanges();
@@ -31,7 +31,7 @@ namespace Repository
 
         public void Update(Usuario e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Usuarios.Update(e);
                 _context.SaveChanges();
@@ -40,7 +40,7 @@ namespace Repository
 
         public List<Usuario> GetAll()
         {       
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 return _context.Usuarios.ToList();
             }
@@ -48,7 +48,7 @@ namespace Repository
 
         public Usuario GetById(int id)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 var usuario = _context.Usuarios.Find(id);
 

@@ -7,24 +7,20 @@ namespace Model
     internal class Estabelecimento
     {
         [Key]
-        public int ID;
+        public int ID { get; set; }
+
+        [MaxLength(100)]
+        public string Estado { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Estado;
+        public string Cidade { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string Cidade;
-
-        [Required]
         [MaxLength(200)]
-        public string Endereco;
+        public string Endereco { get; set; }
 
-        
         public Estabelecimento() { }
 
-        
         public Estabelecimento(string estado, string cidade, string endereco)
         {
             ID = 0;
@@ -32,5 +28,6 @@ namespace Model
             Cidade = cidade;
             Endereco = endereco;
         }
+        
     }
 }

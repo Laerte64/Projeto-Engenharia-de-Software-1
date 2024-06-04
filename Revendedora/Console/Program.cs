@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Model;
 using Repository;
 using System;
@@ -7,29 +8,48 @@ class Program
 {
     static void Main(string[] args)
     {
-        var estabelecimentoRepo = new EstabelecimentoRepository();
+        
+            // Supondo que estabelecimento e modelo já existam no banco de dados
+            // Recupere-os do banco de dados em vez de criar novos
+            var estabelecimentoRepository = new EstabelecimentoRepository();
 
-        // Adicionar estabelecimentos
-        estabelecimentoRepo.Add(new Estabelecimento("São Paulo", "São Paulo", "Rua da Consolação, 123"));
-        estabelecimentoRepo.Add(new Estabelecimento("Rio de Janeiro", "Rio de Janeiro", "Avenida Atlântica, 1000"));
-        System.Console.WriteLine("Estabelecimentos adicionados.");
+            var estabelecimento = new Estabelecimento("Medianeira", "São Paulo", "Rua da Consolação, 123");
+            estabelecimentoRepository.Add(estabelecimento);
 
-        // Listar todos os estabelecimentos
-        var estabelecimentos = estabelecimentoRepo.GetAll();
-        System.Console.WriteLine("Listando todos os estabelecimentos:");
-        foreach (var estab in estabelecimentos)
-        {
-            System.Console.WriteLine($"Estado: {estab.Estado}, Cidade: {estab.Cidade}, Endereço: {estab.Endereco}");
-        }
 
-        // Atualizar estabelecimento
-        var estabToUpdate = estabelecimentoRepo.GetById(estabelecimentos.First().ID);
-        estabToUpdate.Endereco = "Rua da Consolação, 500";
-        estabelecimentoRepo.Update(estabToUpdate);
-        System.Console.WriteLine("Estabelecimento atualizado.");
+            
+               var modelo = new Modelo
+                {
+                    Nome = "Civic",
+                    Marca = "Honda",
+                    Ano = 2022,
+                    Motor = "1.5 Turbo",
+                    NumeroPortas = 4,
+                    Transmissao = "Automática",
+                    Combustivel = "Gasolina"
+                };
 
-        // Remover um estabelecimento
-        estabelecimentoRepo.Remove(estabToUpdate);
-        System.Console.WriteLine("Estabelecimento removido.");
+        var modeloRepository = new ModeloRepository();
+
+        modeloRepository.Add(modelo);
+            
+
+        
+
+            // Criar e adicionar veículo referenciando o modelo e estabelecimento
+            var veiculo = new Veiculo
+            {
+                ModeloID = modelo.ID, // Referência direta ao objeto modelo
+                _Condicao = Veiculo.Condicao.Novo,
+                EstabelecimentoID = estabelecimento.ID, // Referência direta ao objeto estabelecimento
+                Valor = 50000
+            };
+
+            var veiculosRepository = new VeiculoRepository();
+            veiculosRepository.Add(veiculo);
+       
+            System.Console.WriteLine("Veículo adicionado com sucesso com ID: " + veiculo.ID);
+        
+
     }
 }

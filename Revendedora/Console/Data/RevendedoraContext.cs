@@ -7,11 +7,9 @@ namespace Data
 {
     class RevendedoraContext : DbContext
     {
-        // Singleton
-        private static RevendedoraContext instance = new RevendedoraContext();
-        private RevendedoraContext() {}
-        public static RevendedoraContext AdquirirContexto() => instance;
-
+        public RevendedoraContext() {}
+        
+        //---------------------------------------------------------------------------------------------//
         //pessoas 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
@@ -34,7 +32,7 @@ namespace Data
             if (!optionsBuilder.IsConfigured)
             {
                 //ver os log do efcore
-                //optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+                //optionsBuilder.LogTo(System.Console.WriteLine); ;
 
                 string connectionString = "Server=localhost;Database=db_revendedora;User=root;Password=admin;";
 
@@ -45,87 +43,148 @@ namespace Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuração das chaves primárias
-            modelBuilder.Entity<Fornecedor>().HasKey(f => f.ID);
-            modelBuilder.Entity<Cliente>().HasKey(c => c.ID);
-            modelBuilder.Entity<Funcionario>().HasKey(f => f.ID);
-            modelBuilder.Entity<Compra>().HasKey(c => c.ID);
-            modelBuilder.Entity<Venda>().HasKey(v => v.ID);
-            modelBuilder.Entity<Estabelecimento>().HasKey(e => e.ID);
-            modelBuilder.Entity<Usuario>().HasKey(u => u.ID);
-            modelBuilder.Entity<Veiculo>().HasKey(v => v.ID);
-            modelBuilder.Entity<Modelo>().HasKey(m => m.ID);
+            modelBuilder.Entity<Fornecedor>()
+                .HasKey(f => f.ID);
+            modelBuilder.Entity<Fornecedor>()
+                .Property(f => f.ID)
+                .ValueGeneratedOnAdd();
 
-            // Relações Cliente-Venda
             modelBuilder.Entity<Cliente>()
-                .HasMany(c => c.Vendas)  // Cliente tem muitas Vendas
-                .WithOne(v => v.Cliente) // Venda tem um Cliente
-                .HasForeignKey(v => v.ID) // Chave estrangeira em Venda
-                .OnDelete(DeleteBehavior.Cascade);  // Ação em cascata para delete
+                .HasKey(c => c.ID);
+            modelBuilder.Entity<Cliente>()
+                .Property(c => c.ID)
+                .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Compra>()
-                .HasOne(c => c.Fornecedor)
-                .WithMany()  // Fornecedor pode ter muitas Compras (ou especificar coleção se existir)
-                .HasForeignKey(c => c.ID);
-            // Compra relaciona-se com Veiculo, Fornecedor e Funcionario
-            modelBuilder.Entity<Compra>()
-                .HasOne(c => c.Veiculo)
-                .WithMany()
-                .HasForeignKey(c => c.ID); // Adicionar VeiculoID em Compra
-            modelBuilder.Entity<Compra>()
-                .HasOne(c => c.Fornecedor)
-                .WithMany()
-                .HasForeignKey(c => c.ID); // Adicionar FornecedorID em Compra
-
-            // Relações Funcionario-Venda e Funcionario-Compra
             modelBuilder.Entity<Funcionario>()
-                .HasMany(f => f.Vendas)  // Funcionario tem muitas Vendas
-                .WithOne(v => v.Funcionario) // Venda tem um Funcionario
-                .HasForeignKey(v => v.ID); // Chave estrangeira em Venda
+                .HasKey(f => f.ID);
             modelBuilder.Entity<Funcionario>()
-                .HasMany(f => f.Compras)  // Funcionario tem muitas Compras
-                .WithOne(c => c.Funcionario) // Compra tem um Funcionario
-                .HasForeignKey(c => c.ID); // Chave estrangeira em Compra
+                .Property(f => f.ID)
+                .ValueGeneratedOnAdd();
 
-            // Relações Venda-Veiculo e Compra-Veiculo
+            modelBuilder.Entity<Compra>()
+                .HasKey(c => c.ID);
+            modelBuilder.Entity<Compra>()
+                .Property(c => c.ID)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<Venda>()
-                .HasOne(v => v.Veiculo)
-                .WithOne(v => v.Venda)
-                 .HasForeignKey<Venda>(c => c.ID);  // A chave estrangeira está em Venda, apontando para Veiculo
+                .HasKey(v => v.ID);
+            modelBuilder.Entity<Venda>()
+                .Property(v => v.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Estabelecimento>()
+                .HasKey(e => e.ID);
+            modelBuilder.Entity<Estabelecimento>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Usuario>()
+                .HasKey(u => u.ID);
+            modelBuilder.Entity<Usuario>()
+                .Property(u => u.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Veiculo>()
+                .HasKey(v => v.ID);
+            modelBuilder.Entity<Veiculo>()
+                .Property(v => v.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Modelo>()
+                .HasKey(m => m.ID);
+            modelBuilder.Entity<Modelo>()
+                .Property(m => m.ID)
+                .ValueGeneratedOnAdd();
+
+            //----------------------------------------------------------------------------------------//
+
+            
+            //compra
+            modelBuilder.Entity<Compra>()
+                .HasOne(c => c.Fornecedor)
+                .WithMany(v => v.Compras)  // Fornecedor pode ter muitas Compras (ou especificar coleção se existir)
+                .HasForeignKey(c => c.FornecedorID);
+
+            modelBuilder.Entity<Compra>()
+                .HasOne(c => c.Funcionario)
+                .WithMany(v => v.Compras)  // Fornecedor pode ter muitas Compras (ou especificar coleção se existir)
+                .HasForeignKey(c => c.FuncionarioID);
+
             modelBuilder.Entity<Compra>()
                 .HasOne(c => c.Veiculo)
-                .WithMany()  // Veiculo pode estar em muitas Compras (ou especificar coleção se existir)
-                .HasForeignKey(c => c.ID);
+                .WithOne(v => v.Compra)  // Fornecedor pode ter muitas Compras (ou especificar coleção se existir)
+                .HasForeignKey<Veiculo>(v => v.CompraID);
 
-            // Relações Compra-Fornecedor
-            // Configurações de relações
-            // Cliente tem muitas Vendas
-            modelBuilder.Entity<Cliente>()
-                .HasMany(c => c.Vendas)
-                .WithOne() // Assumindo que Venda tem uma propriedade de navegação para Cliente
-                .HasForeignKey(v => v.ID); // Adicionar ID em Venda
+            //estabelecimento
+            //fornecedor
 
-            // Funcionario tem muitas Vendas e Compras
+
+            //funcionario
             modelBuilder.Entity<Funcionario>()
-                .HasMany(f => f.Vendas)
-                .WithOne()
-                .HasForeignKey(v => v.ID); // Adicionar FuncionarioID em Venda
+                .HasOne(c => c.Usuario)
+                .WithOne(v => v.Funcionario)  // Fornecedor pode ter muitas Compras (ou especificar coleção se existir)
+                .HasForeignKey<Usuario>(v => v.FuncionarioID);
 
-            modelBuilder.Entity<Funcionario>()
-                .HasMany(f => f.Compras)
-                .WithOne(c => c.Funcionario)
-                .HasForeignKey(c => c.ID);
+            //modelo
 
-            // Venda tem um Veiculo e Veiculo pode estar em muitas Vendas
-            modelBuilder.Entity<Cliente>()
-               .HasMany(c => c.Vendas) // Ajuste para a coleção que deve estar disponível em Venda
-               .WithOne(v => v.Cliente) // Certifique-se de que existe uma propriedade Cliente em Venda
-               .HasForeignKey(v => v.ID); // ClienteID é a chave estrangeira em Venda
-            
-            // Veiculo tem um Modelo
+
+            //usuario
+            modelBuilder.Entity<Usuario>()
+                .HasOne(c => c.Funcionario)
+                .WithOne(v => v.Usuario)  // Fornecedor pode ter muitas Compras (ou especificar coleção se existir)
+                .HasForeignKey<Funcionario>(v => v.UsuarioID);
+
+            //veiculo
+
             modelBuilder.Entity<Veiculo>()
                 .HasOne(v => v.Modelo)
-                .WithMany() // Assumindo que Modelo não tem uma coleção de Veiculos
-                .HasForeignKey(v => v.ID); // Adicionar ModeloID em Veiculo
+                .WithOne()
+                .HasForeignKey<Veiculo>(v => v.ModeloID);
+
+            modelBuilder.Entity<Veiculo>()
+                .HasOne(v => v.Compra)
+                .WithOne(e => e.Veiculo)
+                .HasForeignKey<Veiculo>(v => v.CompraID);
+
+            modelBuilder.Entity<Veiculo>()
+               .HasOne(v => v.Venda)
+               .WithOne(e => e.Veiculo)
+               .HasForeignKey<Veiculo>(v => v.VendaID);
+
+            modelBuilder.Entity<Veiculo>()
+              .HasOne(v => v.Estabelecimento)
+              .WithMany()
+              .HasForeignKey(v => v.EstabelecimentoID);
+
+            //modelBuilder.Entity<OrdemDeServico>()
+            //    .HasOne(v => v.Vendedor)
+            //   .WithMany(c => c.OrdensDeServico) // Define o relacionamento (um-para-muitos)
+            //   .HasForeignKey(v => v.VendedorId);
+
+
+            //venda
+            modelBuilder.Entity<Venda>()
+              .HasOne(v => v.Veiculo)
+              .WithOne(e => e.Venda)
+              .HasForeignKey<Veiculo>(v => v.VendaID);
+
+            modelBuilder.Entity<Venda>()
+              .HasOne(v => v.Cliente)
+              .WithMany(e => e.Vendas)
+              .HasForeignKey(v => v.ClienteID);
+
+            modelBuilder.Entity<Venda>()
+             .HasOne(v => v.Funcionario)
+             .WithMany(e => e.Vendas)
+             .HasForeignKey(v => v.FuncionarioID);
+
+       
+            // modelBuilder.Entity<Entidade1>()
+            //    .HasOne(e1 => e1.Entidade2)
+            //    .WithOne(e2 => e2.Entidade1)
+            //    .HasForeignKey<Entidade2>(e2 => e2.Entidade1ID); // Chave estrangeira na Entidade2
+
         }
     }
 }
