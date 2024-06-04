@@ -8,7 +8,7 @@ namespace Model
     [Table("tb_cliente")]
     internal class Cliente : Pessoa
     {
-        private List<Venda> Vendas = new List<Venda>();
+        public List<Venda> Vendas = new List<Venda>();
         public Cliente() { }
 
         public Cliente(string nome, string cpf)
