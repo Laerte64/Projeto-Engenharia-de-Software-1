@@ -1,4 +1,5 @@
 ﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace Repository
         {
             using (var _context = new RevendedoraContext())
             {
-                return _context.Funcionarios.ToList();
+                return _context.Funcionarios.Include(f => f.Vendas).Include(f => f.Compras).ToList();
             }
         }
 

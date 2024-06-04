@@ -43,7 +43,7 @@ namespace Repository
         {
             using (var _context = new RevendedoraContext())
             {
-               return  _context.Estabelecimentos.ToList();
+                return _context.Estabelecimentos.ToList();
             }
         }
 
