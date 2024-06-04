@@ -12,7 +12,7 @@ namespace Repository
     {
         public void Add(Fornecedor e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Fornecedores.Add(e);
                 _context.SaveChanges();
@@ -21,7 +21,7 @@ namespace Repository
 
         public void Remove(Fornecedor e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Fornecedores.Remove(e);
                 _context.SaveChanges();
@@ -30,7 +30,7 @@ namespace Repository
 
         public void Update(Fornecedor e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Fornecedores.Update(e);
                 _context.SaveChanges();
@@ -39,7 +39,7 @@ namespace Repository
 
         public List<Fornecedor> GetAll()
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 return _context.Fornecedores.ToList();
             }
@@ -47,7 +47,7 @@ namespace Repository
 
         public Fornecedor GetById(int id)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 var fornecedor = _context.Fornecedores.Find(id);
 

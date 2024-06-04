@@ -12,7 +12,7 @@ namespace Repository
     {
         public void Add(Funcionario e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Funcionarios.Add(e);
                 _context.SaveChanges();
@@ -21,7 +21,7 @@ namespace Repository
 
         public void Remove(Funcionario e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Funcionarios.Remove(e);
                 _context.SaveChanges();
@@ -30,7 +30,7 @@ namespace Repository
 
         public void Update(Funcionario e)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 _context.Funcionarios.Update(e);
                 _context.SaveChanges();
@@ -39,7 +39,7 @@ namespace Repository
 
         public List<Funcionario> GetAll()
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 return _context.Funcionarios.ToList();
             }
@@ -47,7 +47,7 @@ namespace Repository
 
         public Funcionario GetById(int id)
         {
-            using (var _context = RevendedoraContext.AdquirirContexto())
+            using (var _context = new RevendedoraContext())
             {
                 var funcionario = _context.Funcionarios.Find(id);
 

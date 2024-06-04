@@ -6,10 +6,11 @@ namespace Model
     [Table("tb_funcionario")]
     internal class Funcionario : Pessoa
     {
-        public Usuario? Usuario;
-        public List<Venda> Vendas;
-        public List<Compra> Compras;
+        public int? UsuarioID { get; set; }
+        public Usuario? Usuario { get; set; }
 
+        public List<Venda> Vendas { get; set; }
+        public List<Compra> Compras { get; set; }
 
         public Funcionario() : base() { }
 
