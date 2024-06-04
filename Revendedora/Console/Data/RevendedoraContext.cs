@@ -1,16 +1,16 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using Repository;
 
 namespace Data
 {
     class RevendedoraContext : DbContext
     {
         // Singleton
-        private RevendedoraContext instance = new RevendedoraContext();
+        private static RevendedoraContext instance = new RevendedoraContext();
         private RevendedoraContext() {}
-        public RevendedoraContext AdquirirContexto() => instance;
-
+        public static RevendedoraContext AdquirirContexto() => instance;
 
         //pessoas 
         public DbSet<Cliente> Clientes { get; set; }
@@ -28,7 +28,6 @@ namespace Data
         //veiculo modelo
         public DbSet<Veiculo> Veiculos { get; set; }
         public DbSet<Modelo> Modelos { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -127,8 +126,6 @@ namespace Data
                 .HasOne(v => v.Modelo)
                 .WithMany() // Assumindo que Modelo não tem uma coleção de Veiculos
                 .HasForeignKey(v => v.ID); // Adicionar ModeloID em Veiculo
-
-            
         }
     }
 }
