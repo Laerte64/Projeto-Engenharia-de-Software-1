@@ -24,6 +24,12 @@ namespace Model
         public Venda RealizarVenda(Veiculo veiculo, Cliente cliente, Decimal valor, DateTime horario)
         {
             Venda venda = new Venda(veiculo, cliente, this, valor, horario);
+
+            if (Vendas == null)
+            {
+                Vendas = new List<Venda>();
+            }
+
             Vendas.Add(venda);
             return venda;
         }
@@ -31,6 +37,12 @@ namespace Model
         public Compra RealizarCompra(Veiculo veiculo, Fornecedor fornecedor, Decimal valor, DateTime horario)
         {
             Compra compra = new Compra(veiculo, fornecedor, this, valor, horario);
+
+            if (Compras == null)
+            {
+                Compras = new List<Compra>();
+            }
+
             Compras.Add(compra);
             return compra;
         }

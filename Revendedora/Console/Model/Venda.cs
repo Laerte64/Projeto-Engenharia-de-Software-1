@@ -33,9 +33,9 @@ namespace Model
         public Venda(Veiculo veiculo, Cliente cliente, Funcionario funcionario, Decimal valor, DateTime horario)
         {
             ID = 0;
-            Veiculo = veiculo;
-            Cliente = cliente;
-            Funcionario = funcionario;
+            VeiculoID = veiculo.ID;
+            ClienteID = cliente.ID;
+            FuncionarioID = funcionario.ID;
             Valor = valor;
             Horario = horario;
         }

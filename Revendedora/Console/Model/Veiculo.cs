@@ -31,11 +31,13 @@ namespace Model
         public Veiculo(Modelo modelo, Condicao condicao, int? compraID, Estabelecimento estabelecimento)
         {
             ID = 0;
-            Modelo = modelo;
+            //Modelo = modelo;
+            ModeloID = modelo.ID;
             _Condicao = condicao;
             CompraID = compraID; // Armazena o ID da compra
             Venda = null;
-            Estabelecimento = estabelecimento;
+            //Estabelecimento = estabelecimento;
+            EstabelecimentoID = estabelecimento.ID;
         }
 
         public enum Condicao

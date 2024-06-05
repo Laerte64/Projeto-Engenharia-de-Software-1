@@ -28,9 +28,14 @@ namespace Model
         public Compra(Veiculo veiculo, Fornecedor fornecedor, Funcionario funcionario, Decimal valor, DateTime horario)
         {
             ID = 0;
-            Veiculo = veiculo;
-            Fornecedor = fornecedor;
-            Funcionario = funcionario;
+
+            
+            //Veiculo = veiculo;
+            VeiculoID = veiculo.ID;
+            //Fornecedor = fornecedor;
+            FornecedorID = fornecedor.ID;
+            //Funcionario = funcionario;
+            FuncionarioID = funcionario.ID;
             Valor = valor;
             Horario = horario;
         }

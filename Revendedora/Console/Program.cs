@@ -10,7 +10,6 @@ class Program
     static void Main(string[] args)
     {
         var controller = Controlador.AdquirirControlador();
-
         controller.ExecutarPrograma();
     }
 }

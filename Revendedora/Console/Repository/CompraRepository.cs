@@ -48,7 +48,6 @@ namespace Repository
                       .Include(c => c.Fornecedor)
                       .Include(c => c.Funcionario)
                       .ToList();
-
             }
         }
 

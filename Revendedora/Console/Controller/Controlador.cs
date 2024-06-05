@@ -22,7 +22,12 @@ namespace Controller
                 (login, senha) = TelaLogin.ExecutarTela(true);
                 usuario = usuarios.Find(u => u.Login == login && u.Senha == senha);
             }
-            
+
+            { 
+            var funcionarioRepository = new FuncionarioRespository();
+            usuario.Funcionario = funcionarioRepository.GetById(usuario.FuncionarioID);
+            }
+
             while (true)
             {
                 int opcao = TelaPrincipal.ExecutarTela();
@@ -31,14 +36,51 @@ namespace Controller
                     case 0:
                         return;
                     case 1:
-                        TelaVerificarVeiculos.ExecutarTela((new VeiculoRepository()).GetAll());
+                        { 
+                            var veiculoRepository = new VeiculoRepository();
+                            var vendaRepository = new VendaRepository();
+
+                            var vendas = vendaRepository.GetAll();
+                            var veiculos = veiculoRepository.GetAll().FindAll(v => vendas.Find(venda => venda.VeiculoID == v.ID) == null);
+                        
+                            TelaVerificarVeiculos.ExecutarTela(veiculos);
+                        }
                         break;
                     case 2:
-                        TelaVerificarVendas.ExecutarTela((new VendaRepository()).GetAll());
+                        {
+                            var vendaRepository = new VendaRepository();
+                            var veiculoRepository = new VeiculoRepository();
+
+                            var vendas = vendaRepository.GetAll();
+                            var veiculos = veiculoRepository.GetAll();
+
+                            var modeloRepository = new ModeloRepository();
+                            var modelos = modeloRepository.GetAll();
+
+                            foreach (var venda in vendas)
+                            {
+                                venda.Veiculo = veiculoRepository.GetById(venda.VeiculoID);
+                                venda.Veiculo.Modelo = modeloRepository.GetById(venda.Veiculo.ModeloID);
+                            }
+
+                            TelaVerificarVendas.ExecutarTela(vendas);
+                        }
                         break;
                     case 3:
-                        TelaVerificarCompras.ExecutarTela((new CompraRepository()).GetAll());
-                        break;
+                        {
+                            var compraRepository = new CompraRepository();
+                            var compras = compraRepository.GetAll();
+
+                            var modeloRepository = new ModeloRepository();
+                            var modelos = modeloRepository.GetAll();
+                            foreach (var compra in compras)
+                            {
+                                compra.Veiculo.Modelo = modeloRepository.GetById(compra.Veiculo.ModeloID);
+                            }
+                            
+                            TelaVerificarCompras.ExecutarTela(compras);
+                            break;
+                        }
                     case 4:
                         TelaVerificarModelos.ExecutarTela((new ModeloRepository()).GetAll());
                         break;
@@ -99,13 +141,32 @@ namespace Controller
                             }
 
                             Veiculo veiculo = new Veiculo(modelo, Veiculo.Condicao.Novo, null, estabelecimento);
-                            Compra compra = usuario.Funcionario.RealizarCompra(veiculo, fornecedor, resposta.valor, System.DateTime.Now);
-                            veiculo.Compra = compra;
-                            veiculo.Valor = resposta.valor * 1.1m;
+
                             var repVeiculo = new VeiculoRepository();
+
                             repVeiculo.Add(veiculo);
+
+                            var funcionarioRepository = new FuncionarioRespository();
+
+                            usuario.Funcionario = funcionarioRepository.GetById(usuario.ID);
+
+
+
+                            Compra compra = usuario.Funcionario.RealizarCompra(veiculo, fornecedor, resposta.valor, System.DateTime.Now);
+                            veiculo.CompraID = null;
+
+                            veiculo.Valor = resposta.valor * 1.1m;
+                            
+                            veiculo.Modelo = null;
+
+                           
                             var repositorio = new CompraRepository();
+
                             repositorio.Add(compra);
+
+                            veiculo.CompraID = compra.ID;
+                            repVeiculo.Update(veiculo);
+
                             TelaRegistrarCompra.Sucesso();
                             break;
                         }
