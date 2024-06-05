@@ -13,7 +13,7 @@ namespace Model
         public string Login { get; set; }
 
         [MaxLength(100)]
-        public string Senha;
+        public string Senha { get; set; }
 
         public int FuncionarioID { get; set; }
         public Funcionario Funcionario { get; set; }

@@ -28,7 +28,7 @@ namespace Model
 
         public Veiculo() { }
 
-        public Veiculo(Modelo modelo, Condicao condicao, int compraID, Estabelecimento estabelecimento)
+        public Veiculo(Modelo modelo, Condicao condicao, int? compraID, Estabelecimento estabelecimento)
         {
             ID = 0;
             Modelo = modelo;
